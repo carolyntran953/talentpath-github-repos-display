@@ -1,23 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
+import styled from 'styled-components';
+import TextFeild from './components/TextFeild'
+import CheckboxQuestion from './components/CheckboxQuestion'
+import Radio from './components/Radio'
 
 function App() {
+
+  const ExampleForm = styled.form`
+    margin-top: 100px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    border-color:#3B4256;
+    border-radius: 6px;
+    background-color:rgb(255, 255, 255);
+  `
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ExampleForm className='example'>
+        <TextFeild />
+        <CheckboxQuestion />
+        <Radio />
+      </ExampleForm>
     </div>
   );
 }
