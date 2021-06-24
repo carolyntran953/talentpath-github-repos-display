@@ -1,9 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
+import './styles/button.css';
 import styled from 'styled-components';
-import TextFeild from './components/TextFeild'
+import TextField from './components/TextFeild';
 import CheckboxQuestion from './components/CheckboxQuestion'
-import Radio from './components/Radio'
 
 function App() {
 
@@ -21,9 +20,8 @@ function App() {
   return (
     <div className="App">
       <ExampleForm className='example'>
-        <TextFeild />
-        <CheckboxQuestion />
-        <Radio />
+        <h1>Github Fetcher</h1>
+        <TextField />
       </ExampleForm>
     </div>
   );

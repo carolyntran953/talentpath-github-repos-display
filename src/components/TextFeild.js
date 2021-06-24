@@ -1,4 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import React, { Component } from 'react';
+import Radio from './Radio';
 
 const Container = styled.div`
     display: flex;
@@ -39,13 +41,55 @@ const TextLabel = styled.label`
     letter-spacing: 0.01em;
 `
 
-function TextFeild() {
-    return (
-        <Container>
-            <TextLabel for='street' > What is your street address? </TextLabel>
-            <TextInput placeholder='Your answer'/>
-        </Container>
-    )
+class TextField extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { 
+            user: '',
+            repos: [] 
+        }; 
+    }
+
+    handleChange(e) {
+        this.setState({
+            user: e.target.value
+        });
+        console.log(this.state.user);
+    }
+
+    handleClick(e) {
+        e.preventDefault();
+        fetch(`https://api.github.com/users/${this.state.user}/repos`)
+          .then(response => response.json())
+          .then(data => {
+              this.setState({repos: data});
+              if (this.state.repos.length === 0) {
+                  console.log('error: user does not exist');
+              }
+          });
+    }
+
+    render() {
+        const btnStyle = {
+            background:"#0048d9", 
+            color:"#fff", 
+            border:'none', 
+            borderRadius:'4px',
+            padding:'4px 16px' 
+        }
+
+        return (
+          <div>
+            <Container>
+                <TextLabel for='user' >Enter a GitHub user: </TextLabel>
+                <TextInput placeholder='Your answer' onChange={ (e) => this.handleChange(e) } />
+            </Container>
+            <button style={btnStyle} onClick={this.handleClick.bind(this)}>Submit</button>
+            <Radio repos={this.state.repos} />
+          </div>
+        )
+    }
+
 }
 
-export default TextFeild
+export default TextField

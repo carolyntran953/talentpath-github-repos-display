@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import React, {useState} from 'react'
-import CustomRadio from './CustomRadio'
+import CustomRadio from './CustomRadio';
+import '../styles/button.css';
 
-function Radio() {
+function Radio(props) {
     const [selected, setSelected] = useState('1')
 
     const RadioContainer = styled.div`
@@ -24,7 +25,7 @@ function Radio() {
         padding: 0px;
 
         cursor: pointer;
-        width: 63px;
+        width: 63px; 
         height: 24px;
     `
 
@@ -45,22 +46,34 @@ function Radio() {
     background: ${props => props.checked ? '#3B4256' : 'white'};
     `
 
-    const renderRadios = ['1', '2', '3', '4', '5'].map(num => {
+    const renderRadios = props.repos.map(repo => {
         return (
             <CustomRadio 
-            value={num}
+            value={repo.html_url}
             selected={selected}
-            text={num}
+            text={repo.name}
             onChange={setSelected}
             />
         )
     })
+
+    const btnStyle = {
+        background:"#0048d9", 
+        color:"#fff", 
+        border:'none', 
+        borderRadius:'4px',
+        padding:'4px 16px'
+    }
     
     return (
-        <RadioContainer>
-            <p>What is 2+2?</p>
-            {renderRadios}
-        </RadioContainer>
+        <div>
+            {props.repos.length === 0
+              ? <p>no repos</p>
+              : <RadioContainer>{renderRadios}</RadioContainer>
+            }
+            <button style={btnStyle} onClick={(e) => {e.preventDefault(); window.open(`${selected}`, '_blank')}}>Go To Repo</button>
+        </div>
+
     )
 }
 
