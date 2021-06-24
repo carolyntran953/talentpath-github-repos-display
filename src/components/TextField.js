@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, { Component } from 'react';
-import Radio from './Radio';
+// import Radio from './Radio';
 import RepoList from './RepoList';
 
 const Container = styled.div`
@@ -86,8 +86,8 @@ class TextField extends React.Component {
                 <TextInput placeholder='Your answer' onChange={ (e) => this.handleChange(e) } />
             </Container>
             <button style={btnStyle} onClick={this.handleClick.bind(this)}>Submit</button>
-            <Radio repos={this.state.repos} />
-            {/* <RepoList repos={this.state.repos} /> */}
+            {/* <Radio repos={this.state.repos} /> */}
+            <RepoList repos={this.state.repos} />
           </div>
         )
     }
