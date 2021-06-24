@@ -1,8 +1,8 @@
 import './App.css';
 import './styles/button.css';
 import styled from 'styled-components';
-import TextField from './components/TextFeild';
-import CheckboxQuestion from './components/CheckboxQuestion'
+import TextField from './components/TextField';
+import CheckboxQuestion from './components/CheckboxQuestion';
 
 function App() {
 
@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="App">
       <ExampleForm className='example'>
-        <h1>Github Fetcher</h1>
+        <h1>GitHub Repositories</h1>
         <TextField />
       </ExampleForm>
     </div>
