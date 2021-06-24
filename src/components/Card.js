@@ -6,10 +6,10 @@ import { faDotCircle, faStar } from '@fortawesome/free-regular-svg-icons';
 const Wrapper = styled.div`
   width: 648px;
   height: 224px;
-  border: solid black 1px;
   font-family: 'Open Sans', sans-serif;
   border-radius: 16px;
   margin-top: 40px;
+  background-color: #fff
 `
 
 const Left = styled.table`

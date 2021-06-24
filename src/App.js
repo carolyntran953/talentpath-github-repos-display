@@ -14,7 +14,7 @@ function App() {
     align-items: space-between;
     border-color:#3B4256;
     border-radius: 6px;
-    background-color:rgb(255, 255, 255);
+    background-color: #EFF0F3;
   `
 
   return (

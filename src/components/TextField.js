@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { Component } from 'react';
-// import Radio from './Radio';
 import RepoList from './RepoList';
+const axios = require('axios');
 
 const Container = styled.div`
     display: flex;
@@ -59,14 +59,12 @@ class TextField extends React.Component {
 
     handleClick(e) {
         e.preventDefault();
-        fetch(`https://api.github.com/users/${this.state.user}/repos`)
-          .then(response => response.json())
-          .then(data => {
-              this.setState({repos: data});
-              if (this.state.repos.length === 0) {
-                  console.log('error: user does not exist');
-              }
-          });
+        axios.get(`https://api.github.com/users/${this.state.user}/repos`)
+          .then(response => {
+              this.setState({repos: response.data});
+              console.log('number of repos: ', this.state.repos.length);
+          })
+          .catch(error => console.log(error));
     }
 
     render() {
