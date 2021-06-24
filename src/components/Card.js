@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCodeBranch, faDotCircle } from '@fortawesome/free-solid-svg-icons';
+import { faStar } from '@fortawesome/free-regular-svg-icons';
 
 const Wrapper = styled.div`
   display: grid;
@@ -63,9 +66,9 @@ function Card(props) {
         <Desc>{props.repo.description}</Desc>
       </Left>
       <Right>
-        <Forks>{props.repo.forks} forks</Forks>
-        <Stars>{props.repo.stargazers_count} stars</Stars>
-        <Issues>{props.repo.open_issues} open issues</Issues>
+        <Forks><FontAwesomeIcon icon={faCodeBranch} /> {props.repo.forks} forks</Forks>
+        <Stars><FontAwesomeIcon icon={faStar} /> {props.repo.stargazers_count} stars</Stars>
+        <Issues><FontAwesomeIcon icon={faDotCircle} /> {props.repo.open_issues} open issues</Issues>
       </Right>
     </Wrapper>
   );
