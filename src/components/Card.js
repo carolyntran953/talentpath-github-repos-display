@@ -1,74 +1,105 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCodeBranch, faDotCircle } from '@fortawesome/free-solid-svg-icons';
-import { faStar } from '@fortawesome/free-regular-svg-icons';
+import { faCodeBranch } from '@fortawesome/free-solid-svg-icons';
+import { faDotCircle, faStar } from '@fortawesome/free-regular-svg-icons';
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
   width: 648px;
   height: 224px;
   border: solid black 1px;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 16px;
+  margin-top: 40px;
 `
 
-const Left = styled.div`
-  display: grid;
-  grid-template-rows: repeat(5, 1fr);
+const Left = styled.table`
+  padding-top: 40px;
+  padding-left: 27px;
+  display: inline-block;
+  width: 392px;
+  height: 224px;
 `
 
-const Right = styled.div`
-  display: grid;
-  grid-template-rows: repeat(6, 1fr);
-  padding: 48px 0;
+const Right = styled.table`
+  display: inline-block;
+  height: 224px;
+  padding-top: 20px;
+  border-spacing: 0 27px;
 `
+
 const Repo = styled.div`
-  grid-column: 1;
-  grid-row: 1;
-  border: solid black 1px;
+  font-color: #081F32;
+  font-family: 'DM Serif Display', serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 25px;
 `
 
 const User = styled.div`
-  grid-column: 1;
-  grid-row: 2;
-  border: solid black 1px;
+  color: #A5ADBB;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+
 `
 
 const Desc = styled.div`
-  grid-column: 1;
-  grid-row: 3;
-  border: solid black 1px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+  color: #6E798C;
 `
 
-const Forks = styled.div`
-  grid-column: 3;
-  grid-row: 1;
-  border: solid black 1px;
-`
+const Icon = styled.td`
 
-const Stars = styled.div`
-  grid-column: 3;
-  grid-row: 2;
-  border: solid black 1px;
 `
-
-const Issues = styled.div`
-  grid-column: 3;
-  grid-row: 3;
-  border: solid black 1px;
+const Num = styled.td`
+  text-align: right;
+  font-weight: 600;
+  font-size: 16px;
+  color: #081F32;
+`
+const Text = styled.td`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 25px;
+  color: #6E798C;
+  padding-left: 3px;
 `
 
 function Card(props) {
   return (
     <Wrapper>
       <Left>
-        <Repo><a href={props.repo.html_url} target="_blank">{props.repo.name}</a></Repo>
-        <User>by {props.repo.owner.login}</User>
-        <Desc>{props.repo.description}</Desc>
+        <tr>
+          <Repo><a href={props.repo.html_url} target="_blank" style={{textDecoration: 'none', color: "#081F32"}}>{props.repo.name}</a></Repo>
+        </tr>
+        <tr>
+          <User>by {props.repo.owner.login}</User>
+        </tr>
+        <tr>
+          <Desc>{props.repo.description}</Desc>
+        </tr>
       </Left>
       <Right>
-        <Forks><FontAwesomeIcon icon={faCodeBranch} /> {props.repo.forks} forks</Forks>
-        <Stars><FontAwesomeIcon icon={faStar} /> {props.repo.stargazers_count} stars</Stars>
-        <Issues><FontAwesomeIcon icon={faDotCircle} /> {props.repo.open_issues} open issues</Issues>
+          <tr>
+            <Icon><FontAwesomeIcon icon={faCodeBranch} /></Icon>
+            <Num>{props.repo.forks}</Num>
+            <Text>forks</Text>
+          </tr>
+          <tr>
+            <Icon><FontAwesomeIcon icon={faStar} /></Icon>
+            <Num>{props.repo.stargazers_count}</Num> 
+            <Text>stars</Text>
+          </tr>
+          <tr>
+            <Icon><FontAwesomeIcon icon={faDotCircle} /></Icon>
+            <Num>{props.repo.open_issues}</Num> 
+            <Text>open issues</Text>
+          </tr>
       </Right>
     </Wrapper>
   );
