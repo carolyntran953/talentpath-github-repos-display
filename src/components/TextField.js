@@ -4,13 +4,14 @@ import RepoList from './RepoList';
 const axios = require('axios');
 
 const Container = styled.div`
-    display: flex;
+    display: block;
     flex-direction: column;
     align-items: flex-start;
     padding: 12px;
 `
 
 const TextInput = styled.input`
+    display: block;
     width: 460px;
     height: 48px;
     margin-top: 26px;
@@ -24,19 +25,17 @@ const TextInput = styled.input`
     align-self: stretch;
     flex-grow: 0;
     margin: 2px 0px;
+    padding-left: 12px;
 
     &:focus {
         outline: none;
         border: 1.5px solid #4361ad;
         border-radius: 3px;
     }
-
-    &:invalid:required {
-        border: 1px solid #ED0131;
-    }
 `
 
 const TextLabel = styled.label`
+    display: block;
     width: 480px;
     height: 24px;
     text-align: left;
@@ -46,7 +45,8 @@ const TextLabel = styled.label`
     letter-spacing: 0.01em;
 `
 
-const ErrorMessage = styled.div`
+const ErrorMessage = styled.span`
+    display: block;
     font-family: IBM Plex Sans;
     font-style: normal;
     font-weight: normal;
@@ -60,7 +60,8 @@ class TextField extends React.Component {
         super(props);
         this.state = { 
             user: '',
-            repos: [] 
+            repos: [],
+            errorMessage: '' 
         }; 
     }
 
@@ -74,12 +75,18 @@ class TextField extends React.Component {
         e.preventDefault();
         axios.get(`https://api.github.com/users/${this.state.user}/repos`)
           .then(response => {
-              this.setState({repos: response.data});
+              this.setState({
+                  repos: response.data,
+                  errorMessage: ''
+                });
               console.log('number of repos: ', this.state.repos.length);
-          })
-          .catch(error => {
-              const errorMessage = 'missing or invalid user name';
-          });
+          }).catch(error => {
+              if (!this.state.user) {
+                this.setState({ errorMessage: 'user name is required' });
+              } else if (error.response.status === 404) {
+                this.setState({ errorMessage: 'user name does not exist' });
+              }
+        });
     }
 
     render() {
@@ -95,8 +102,8 @@ class TextField extends React.Component {
           <div>
             <Container>
                 <TextLabel for='user' ><span>Enter a GitHub user </span><span style={{color: "#ED0131"}}>*</span></TextLabel>
-                <TextInput placeholder='Text' onChange={ (e) => this.handleChange(e) } required />
-                <ErrorMessage>error message</ErrorMessage>
+                <TextInput placeholder='Text' onChange={ (e) => this.handleChange(e) } />
+                <ErrorMessage>{this.state.errorMessage}</ErrorMessage>
             </Container>
             <button style={btnStyle} onClick={this.handleClick.bind(this)}>Submit</button>
             <RepoList repos={this.state.repos} />
