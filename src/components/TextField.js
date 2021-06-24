@@ -55,7 +55,6 @@ class TextField extends React.Component {
         this.setState({
             user: e.target.value
         });
-        console.log(this.state.user);
     }
 
     handleClick(e) {
