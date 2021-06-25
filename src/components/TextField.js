@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import React, { Component } from 'react';
-import RepoList from './RepoList';
-const axios = require('axios');
 
 const Container = styled.div`
     display: block;
@@ -59,9 +57,7 @@ class TextField extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            user: '',
-            repos: [],
-            errorMessage: '' 
+            user: null
         }; 
     }
 
@@ -73,19 +69,7 @@ class TextField extends React.Component {
 
     handleClick(e) {
         e.preventDefault();
-        axios.get(`https://api.github.com/search/repositories?q=user:${this.state.user}&page=1&per_page=50`)
-          .then(response => {
-              this.setState({
-                  repos: response.data.items,
-                  errorMessage: ''
-                });
-          }).catch(error => {
-              if (!this.state.user) {
-                this.setState({ errorMessage: 'username is required' });
-              } else if (error.response.status === 404) {
-                this.setState({ errorMessage: 'username does not exist' });
-              }
-          });
+        this.props.onSubmitClick(this.state.user);
     }
 
     render() {
@@ -105,7 +89,6 @@ class TextField extends React.Component {
                 <ErrorMessage>{this.state.errorMessage}</ErrorMessage>
             </Container>
             <button style={btnStyle} onClick={this.handleClick.bind(this)}>Submit</button>
-            <RepoList repos={this.state.repos} />
           </div>
         )
     }
