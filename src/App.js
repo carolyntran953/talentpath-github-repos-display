@@ -43,7 +43,9 @@ function App() {
           <h1>GitHub Repositories</h1>
           <TextField onSubmitClick={handleSubmitClick} errorMessage={errorMessage} />
         </ExampleForm>
-        {!errorMessage && <RepoList repos={repos} />}
+        {!errorMessage && 
+          <RepoList repos={repos} />
+        }
       </div>
     );
 }
