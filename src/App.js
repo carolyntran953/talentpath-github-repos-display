@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import TextField from './components/TextField';
 import CheckboxQuestion from './components/CheckboxQuestion';
 
-function App() {
+function App(props) {
 
   const ExampleForm = styled.form`
     margin-top: 100px;

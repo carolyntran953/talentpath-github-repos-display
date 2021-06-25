@@ -73,18 +73,18 @@ class TextField extends React.Component {
 
     handleClick(e) {
         e.preventDefault();
-        axios.get(`https://api.github.com/users/${this.state.user}/repos`)
+        axios.get(`https://api.github.com/search/repositories?q=user:${this.state.user}&page=1&per_page=50`)
           .then(response => {
               this.setState({
-                  repos: response.data,
+                  repos: response.data.items,
                   errorMessage: ''
                 });
               console.log('number of repos: ', this.state.repos.length);
           }).catch(error => {
               if (!this.state.user) {
-                this.setState({ errorMessage: 'user name is required' });
+                this.setState({ errorMessage: 'username is required' });
               } else if (error.response.status === 404) {
-                this.setState({ errorMessage: 'user name does not exist' });
+                this.setState({ errorMessage: 'username does not exist' });
               }
         });
     }
