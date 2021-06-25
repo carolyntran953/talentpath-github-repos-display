@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import React, {useState} from 'react'
 import CustomRadio from './CustomRadio';
-import '../styles/button.css';
 
 function Radio(props) {
     const [selected, setSelected] = useState('1')

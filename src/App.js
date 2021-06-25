@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-import './styles/button.css';
 import styled from 'styled-components';
 import TextField from './components/TextField';
 import RepoList from './components/RepoList';
@@ -29,7 +28,7 @@ function App() {
       .then(response => {
           setRepos(response.data.items);
           setErrorMessage('');
-          console.log('number of repos: ', repos.length);
+
       }).catch(error => {
           if (error.response.status >= 400 && error.response.status < 500) {
             setErrorMessage('invalid username' );

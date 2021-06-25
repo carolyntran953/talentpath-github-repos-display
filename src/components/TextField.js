@@ -51,12 +51,30 @@ const TextLabel = styled.label`
 
 const ErrorMessage = styled.span`
     display: block;
-    font-family: IBM Plex Sans;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
     line-height: 16px;
     color: #ED0131;
+`
+
+const Button = styled.button`
+    border-radius: 6px;
+    padding: 4px, 16px;
+    width: 92px;
+    background-color: #0048D9;
+    color: #ffffff;
+    border: none;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+
+    &:hover {
+        background-color: #002266;
+        cursor: pointer;
+    }
 `
 
 class TextField extends React.Component {
@@ -79,13 +97,13 @@ class TextField extends React.Component {
     }
 
     render() {
-        const btnStyle = {
-            background:"#0048d9", 
-            color:"#fff", 
-            border:'none', 
-            borderRadius:'4px',
-            padding:'4px 16px' 
-        }
+        // const btnStyle = {
+        //     background:"#0048d9", 
+        //     color:"#fff", 
+        //     border:'none', 
+        //     borderRadius:'4px',
+        //     padding:'4px 16px' 
+        // }
 
         const errStyle = {
             border: "1px solid #ED0131",
@@ -103,7 +121,8 @@ class TextField extends React.Component {
                 }
                 <ErrorMessage>{this.props.errorMessage}</ErrorMessage>
             </Container>
-            <button style={btnStyle} onClick={this.handleClick.bind(this)}>Submit</button>
+            {/* <button style={btnStyle} onClick={this.handleClick.bind(this)}>Submit</button> */}
+            <Button onClick={this.handleClick.bind(this)}>Submit</Button>
           </div>
         )
     }
