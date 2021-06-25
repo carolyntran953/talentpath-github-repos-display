@@ -86,7 +86,7 @@ class TextField extends React.Component {
             <Container>
                 <TextLabel for='user' ><span>Enter a GitHub user </span><span style={{color: "#ED0131"}}>*</span></TextLabel>
                 <TextInput placeholder='Text' onChange={ (e) => this.handleChange(e) } />
-                <ErrorMessage>{this.state.errorMessage}</ErrorMessage>
+                <ErrorMessage>{this.props.errorMessage}</ErrorMessage>
             </Container>
             <button style={btnStyle} onClick={this.handleClick.bind(this)}>Submit</button>
           </div>
