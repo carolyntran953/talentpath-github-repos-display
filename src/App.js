@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import './styles/button.css';
 import styled from 'styled-components';
@@ -17,45 +17,36 @@ const ExampleForm = styled.form`
   background-color: #EFF0F3;
 `
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { 
-        repos: [],
-        errorMessage: '' 
-    }; 
-  }
+function App() {
+  const [repos, setRepos] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  handleSubmitClick(user) {
+  const handleSubmitClick = (user) => {
     if (!user) {
-      this.setState({ errorMessage: 'username is required' });
+      setErrorMessage('username is required');
     } else {
       axios.get(`https://api.github.com/search/repositories?q=user:${user}&page=1&per_page=50`)
       .then(response => {
-          this.setState({
-              repos: response.data.items,
-              errorMessage: ''
-            });
-          console.log('number of repos: ', this.state.repos.length);
+          setRepos(response.data.items);
+          setErrorMessage('');
+          console.log('number of repos: ', repos.length);
       }).catch(error => {
           if (error.response.status >= 400 && error.response.status < 500) {
-            this.setState({ errorMessage: 'invalid username' });
+            setErrorMessage('invalid username' );
           }
       });
     }
   }
   
-  render() {
     return (
       <div className="App">
         <ExampleForm className='example'>
           <h1>GitHub Repositories</h1>
-          <TextField onSubmitClick={this.handleSubmitClick.bind(this)} errorMessage={this.state.errorMessage} />
+          <TextField onSubmitClick={handleSubmitClick} errorMessage={errorMessage} />
         </ExampleForm>
-        {!this.state.errorMessage && <RepoList repos={this.state.repos} />}
+        {!errorMessage && <RepoList repos={repos} />}
       </div>
     );
-  }
 }
 
 export default App;
