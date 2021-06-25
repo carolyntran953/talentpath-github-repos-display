@@ -88,17 +88,26 @@ function Card(props) {
           <tr>
             <Icon><FontAwesomeIcon icon={faCodeBranch} /></Icon>
             <Num>{props.repo.forks}</Num>
-            <Text>forks</Text>
+            {props.repo.forks === 1 
+              ? <Text>fork</Text>
+              : <Text>forks</Text>
+            }
           </tr>
           <tr>
             <Icon><FontAwesomeIcon icon={faStar} /></Icon>
             <Num>{props.repo.stargazers_count}</Num> 
-            <Text>stars</Text>
+            {props.repo.stargazers_count === 1 
+              ? <Text>star</Text>
+              : <Text>stars</Text>
+            }
           </tr>
           <tr>
             <Icon><FontAwesomeIcon icon={faDotCircle} /></Icon>
             <Num>{props.repo.open_issues}</Num> 
-            <Text>open issues</Text>
+            {props.repo.open_issues === 1 
+              ? <Text>open issue</Text>
+              : <Text>open issues</Text>
+            }
           </tr>
       </Right>
     </Wrapper>

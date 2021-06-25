@@ -79,14 +79,13 @@ class TextField extends React.Component {
                   repos: response.data.items,
                   errorMessage: ''
                 });
-              console.log('number of repos: ', this.state.repos.length);
           }).catch(error => {
               if (!this.state.user) {
                 this.setState({ errorMessage: 'username is required' });
               } else if (error.response.status === 404) {
                 this.setState({ errorMessage: 'username does not exist' });
               }
-        });
+          });
     }
 
     render() {
