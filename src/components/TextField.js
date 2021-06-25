@@ -30,6 +30,12 @@ const TextInput = styled.input`
         border: 1.5px solid #4361ad;
         border-radius: 3px;
     }
+
+    &:invalid {
+        border: 1px solid #ED0131;
+        box-sizing: border-box;
+        border-radius: 4px;
+    }
 `
 
 const TextLabel = styled.label`
@@ -81,11 +87,20 @@ class TextField extends React.Component {
             padding:'4px 16px' 
         }
 
+        const errStyle = {
+            border: "1px solid #ED0131",
+            boxSizing: "border-box",
+            borderRadius: "4px"
+        }
+
         return (
           <div>
             <Container>
                 <TextLabel for='user' ><span>Enter a GitHub user </span><span style={{color: "#ED0131"}}>*</span></TextLabel>
-                <TextInput placeholder='Text' onChange={ (e) => this.handleChange(e) } />
+                {this.props.errorMessage
+                  ? <TextInput style={errStyle} placeholder='Text' onChange={ (e) => this.handleChange(e) } />
+                  : <TextInput placeholder='Text' onChange={ (e) => this.handleChange(e) } />
+                }
                 <ErrorMessage>{this.props.errorMessage}</ErrorMessage>
             </Container>
             <button style={btnStyle} onClick={this.handleClick.bind(this)}>Submit</button>
