@@ -52,7 +52,7 @@ class App extends React.Component {
           <h1>GitHub Repositories</h1>
           <TextField onSubmitClick={this.handleSubmitClick.bind(this)} errorMessage={this.state.errorMessage} />
         </ExampleForm>
-        <RepoList repos={this.state.repos} />
+        {!this.state.errorMessage && <RepoList repos={this.state.repos} />}
       </div>
     );
   }
