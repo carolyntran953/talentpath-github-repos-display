@@ -27,7 +27,7 @@ const Right = styled.table`
   border-spacing: 0 27px;
 `
 
-const Repo = styled.div`
+const Repo = styled.td`
   font-color: #081F32;
   font-family: 'DM Serif Display', serif;
   font-style: normal;
@@ -36,7 +36,7 @@ const Repo = styled.div`
   line-height: 25px;
 `
 
-const User = styled.div`
+const User = styled.td`
   color: #A5ADBB;
   font-style: normal;
   font-weight: normal;
@@ -45,7 +45,7 @@ const User = styled.div`
 
 `
 
-const Desc = styled.div`
+const Desc = styled.td`
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -74,17 +74,22 @@ function Card(props) {
   return (
     <Wrapper>
       <Left>
-        <tr>
-          <Repo><a href={props.repo.html_url} target="_blank" style={{textDecoration: 'none', color: "#081F32"}}>{props.repo.name}</a></Repo>
-        </tr>
-        <tr>
-          <User>by {props.repo.owner.login}</User>
-        </tr>
-        <tr>
-          <Desc>{props.repo.description}</Desc>
-        </tr>
+        <tbody>
+          <tr>
+            <Repo><a href={props.repo.html_url} target="_blank" rel="noreferrer" style={{textDecoration: 'none', color: "#081F32"}}>{props.repo.name}</a></Repo>
+          </tr>
+          <tr>
+            <User>by {props.repo.owner.login}</User>
+          </tr>
+          <tr>
+            <Desc>{props.repo.description}</Desc>
+          </tr>
+        </tbody>
+
+
       </Left>
       <Right>
+        <tbody>
           <tr>
             <Icon><FontAwesomeIcon icon={faCodeBranch} /></Icon>
             <Num>{props.repo.forks}</Num>
@@ -109,6 +114,8 @@ function Card(props) {
               : <Text>open issues</Text>
             }
           </tr>
+        </tbody>
+
       </Right>
     </Wrapper>
   );

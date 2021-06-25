@@ -96,7 +96,7 @@ class TextField extends React.Component {
         return (
           <div>
             <Container>
-                <TextLabel for='user' ><span>Enter a GitHub user </span><span style={{color: "#ED0131"}}>*</span></TextLabel>
+                <TextLabel htmlFor='user' ><span>Enter a GitHub user </span><span style={{color: "#ED0131"}}>*</span></TextLabel>
                 {this.props.errorMessage
                   ? <TextInput style={errStyle} placeholder='Text' onChange={ (e) => this.handleChange(e) } />
                   : <TextInput placeholder='Text' onChange={ (e) => this.handleChange(e) } />
