@@ -81,7 +81,7 @@ class TextField extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            user: null
+            user: ''
         }; 
     }
 
@@ -89,6 +89,7 @@ class TextField extends React.Component {
         this.setState({
             user: e.target.value
         });
+        console.log('user: ', this.state.user);
     }
 
     handleClick(e) {
@@ -97,13 +98,6 @@ class TextField extends React.Component {
     }
 
     render() {
-        // const btnStyle = {
-        //     background:"#0048d9", 
-        //     color:"#fff", 
-        //     border:'none', 
-        //     borderRadius:'4px',
-        //     padding:'4px 16px' 
-        // }
 
         const errStyle = {
             border: "1px solid #ED0131",
@@ -121,7 +115,6 @@ class TextField extends React.Component {
                 }
                 <ErrorMessage>{this.props.errorMessage}</ErrorMessage>
             </Container>
-            {/* <button style={btnStyle} onClick={this.handleClick.bind(this)}>Submit</button> */}
             <Button onClick={this.handleClick.bind(this)}>Submit</Button>
           </div>
         )

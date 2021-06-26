@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import styled from 'styled-components';
 import TextField from './components/TextField';
@@ -28,7 +28,6 @@ function App() {
       .then(response => {
           setRepos(response.data.items);
           setErrorMessage('');
-
       }).catch(error => {
           if (error.response.status >= 400 && error.response.status < 500) {
             setErrorMessage('invalid username' );
@@ -36,18 +35,22 @@ function App() {
       });
     }
   }
-  
-    return (
-      <div className="App">
-        <ExampleForm className='example'>
-          <h1>GitHub Repositories</h1>
-          <TextField onSubmitClick={handleSubmitClick} errorMessage={errorMessage} />
-        </ExampleForm>
-        {!errorMessage && 
-          <RepoList repos={repos} />
-        }
-      </div>
-    );
+
+  useEffect(() => {
+    console.log('number of repos: ', repos.length);
+  });
+
+  return (
+    <div className="App">
+      <ExampleForm className='example'>
+        <h1>GitHub Repositories</h1>
+        <TextField onSubmitClick={handleSubmitClick} errorMessage={errorMessage} />
+      </ExampleForm>
+      {!errorMessage && 
+        <RepoList repos={repos} />
+      }
+    </div>
+  );
 }
 
 export default App;
