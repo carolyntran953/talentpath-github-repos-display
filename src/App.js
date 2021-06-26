@@ -22,6 +22,7 @@ function App() {
 
   const handleSubmitClick = (user) => {
     if (!user) {
+      setRepos([]);
       setErrorMessage('username is required');
     } else {
       axios.get(`https://api.github.com/search/repositories?q=user:${user}&page=1&per_page=50`)
@@ -30,6 +31,7 @@ function App() {
           setErrorMessage('');
       }).catch(error => {
           if (error.response.status >= 400 && error.response.status < 500) {
+            setRepos([]);
             setErrorMessage('invalid username' );
           }
       });
@@ -46,9 +48,7 @@ function App() {
         <h1>GitHub Repositories</h1>
         <TextField onSubmitClick={handleSubmitClick} errorMessage={errorMessage} />
       </ExampleForm>
-      {!errorMessage && 
-        <RepoList repos={repos} />
-      }
+      <RepoList repos={repos} />
     </div>
   );
 }
